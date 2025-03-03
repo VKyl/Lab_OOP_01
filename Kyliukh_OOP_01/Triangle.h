@@ -12,7 +12,7 @@ public:
 		const Point& _b;
 
 	public:
-		Segment(Point& a, Point& b);
+		Segment(const Point& a, const Point& b);
 	
 		const double length();
 		/*{
@@ -24,7 +24,7 @@ public:
 
 private:
 	Point _a, _b, _c;
-	Segment *_ab_ptr(), * _ac_ptr, * _bc_ptr;
+	Segment *_ab_ptr, * _ac_ptr, * _bc_ptr;
 	
 	Point *_ab_mid_ptr, *_ac_mid_ptr, *_bc_mid_ptr;
 
@@ -64,7 +64,7 @@ public:
 	const Segment& medianBC();
 
 	Triangle& operator=(const Triangle& t);
-	Triangle& operator=(const Triangle&& t); 
+	Triangle& operator=(Triangle&& t); 
 
 private:
 	void clearTriangle(Triangle& t);

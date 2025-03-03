@@ -13,15 +13,15 @@ Point::~Point(){}
 
 Point& Point::operator=(const Point& p)
 {
-	_x = p.x();
-	_y = p.y();
+	x() = p.x();
+	y() = p.y();
 	return *this;
 }
 
 Point& Point::operator=(Point&& p)
 {
-	_x = p.x();
-	_y = p.y();
+	x() = p.x();
+	y() = p.y();
 	p.x() = 0;
 	p.y() = 0;
 	return *this;
