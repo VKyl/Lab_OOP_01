@@ -10,16 +10,16 @@ private:
 public:
 	Point(double x = 0, double y = 0);
 	Point(const Point&);
-	Point(Point&& p);
+	Point(Point&&) = delete;
 	~Point();
 
 	Point& operator=(const Point&);
-	Point& operator=(Point&&);
+	Point& operator=(Point&&) = delete;
 
 	double& x(){ return _x; }
 	double& y() { return _y; }
-	const double& x()const { return _x; }
-	const double& y()const { return _y; }
+	const double& x() const { return _x; }
+	const double& y() const { return _y; }
 };
 
 ostream& operator<<(ostream&, const Point&);

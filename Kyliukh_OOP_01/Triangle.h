@@ -43,17 +43,17 @@ public:
 	const Point& a() const { return _a; }
 	void a(const double x, const double y);
 	void a(const Point& p);
-	void a(Point&& p);
+	//void a(Point&& p);
 
 	const Point& b() const { return _b; }
 	void b(const double x, const double y);
 	void b(const Point& p);
-	void b(Point&& p);
+	//void b(Point&& p);
 
 	const Point& c() const { return _c; }
 	void c(const double x, const double y);
 	void c(const Point& p);
-	void c(Point&& p);
+	//void c(Point&& p);
 
 	const Segment& ab();
 	const Segment& ac();
