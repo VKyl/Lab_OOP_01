@@ -17,6 +17,20 @@ Point::Point(Point&& p) noexcept : _x(p.x()), _y(p.y())
 
 Point::~Point(){}
 
+Point& Point::operator+=(const Point& v)
+{
+	x() += v.x();
+	y() += v.y();
+	return *this;
+}
+
+Point& Point::operator-=(const Point& v)
+{
+	x() -= v.x();
+	y() -= v.y();
+	return *this;
+}
+
 Point& Point::operator=(const Point& p)
 {
 	x() = p.x();
@@ -39,28 +53,14 @@ ostream& operator<< (ostream& out, const Point& p)
 	return out;
 }
 
-[[nodiscard]] const Point operator+ (const Point& u, const Point& v)
+_NODISCARD const Point operator+ (const Point& u, const Point& v)
 {
 	return { u.x() + v.x(), u.y() + v.y()};
 }
 
-[[nodiscard]] const Point operator- (const Point& u, const Point& v)
+_NODISCARD const Point operator- (const Point& u, const Point& v)
 {
 	return { u.x() - v.x(), u.y() - v.y() };
-}
-
-Point& operator+=(Point& u, const Point& v)
-{
-	u.x() +=  v.x();
-	u.y() += v.y();
-	return u;
-}
-
-Point& operator-=(Point& u, const Point& v)
-{
-	u.x() -= v.x();
-	u.y() -= v.y();
-	return u;
 }
 
 bool operator==(const Point& u, const Point& v)

@@ -13,6 +13,8 @@ public:
 	Point(Point&&) noexcept;
 	~Point();
 
+	Point& operator+=(const Point&);
+	Point& operator-=(const Point&);
 	Point& operator=(const Point&);
 	Point& operator=(Point&&) noexcept;
 
@@ -24,10 +26,8 @@ public:
 
 ostream& operator<<(ostream&, const Point&);
 
-[[nodiscard]] const Point operator+ (const Point& u, const Point& v) ;
-[[nodiscard]] const Point operator- (const Point& u, const Point& v);
-Point& operator+=(Point&, const Point&);
-Point& operator-=(Point&, const Point&);
+_NODISCARD const Point operator+ (const Point& u, const Point& v) ;
+_NODISCARD const Point operator- (const Point& u, const Point& v);
 bool operator==(const Point& u, const Point& v);
 bool operator!=(const Point& u, const Point& v);
 
