@@ -3,12 +3,27 @@ Point::Point(double x, double y): _x(x), _y(y) {}
 
 Point::Point(const Point& p): _x(p.x()), _y(p.y()) {}
 
+Point::Point(Point&& p): _x(p.x()), _y(p.y())
+{
+	p.x() = 0;
+	p.y() = 0;
+}
+
 Point::~Point(){}
 
 Point& Point::operator=(const Point& p)
 {
 	_x = p.x();
 	_y = p.y();
+	return *this;
+}
+
+Point& Point::operator=(Point&& p)
+{
+	_x = p.x();
+	_y = p.y();
+	p.x() = 0;
+	p.y() = 0;
 	return *this;
 }
 

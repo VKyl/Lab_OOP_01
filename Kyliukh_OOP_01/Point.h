@@ -10,11 +10,11 @@ private:
 public:
 	Point(double x = 0, double y = 0);
 	Point(const Point&);
-	Point(Point&&) = delete;
+	Point(Point&& p);
 	~Point();
 
 	Point& operator=(const Point&);
-	Point& operator=(Point&&) = delete;
+	Point& operator=(Point&&);
 
 	double& x(){ return _x; }
 	double& y() { return _y; }
