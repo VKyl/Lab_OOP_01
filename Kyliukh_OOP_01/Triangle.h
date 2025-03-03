@@ -33,9 +33,9 @@ public:
 	Point& c() { return _c; }
 	const Point& c() const { return _c; }
 
-	Segment& ab();
-	Segment& ac();
-	Segment& bc();
+	const Segment& ab();
+	const Segment& ac();
+	const Segment& bc();
 
 	//const Segment& ab() const; in question
 };
