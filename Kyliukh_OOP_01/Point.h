@@ -10,11 +10,11 @@ private:
 public:
 	Point(double x = 0, double y = 0);
 	Point(const Point&);
-	Point(Point&&) = delete;
+	Point(Point&&);
 	~Point();
 
 	Point& operator=(const Point&);
-	Point& operator=(Point&&) = delete;
+	Point& operator=(Point&&);
 
 	double& x(){ return _x; }
 	double& y() { return _y; }
@@ -24,8 +24,8 @@ public:
 
 ostream& operator<<(ostream&, const Point&);
 
-const Point operator+ (const Point& u, const Point& v);
-const Point operator- (const Point& u, const Point& v);
+[[nodiscard]] const Point& operator+ (const Point& u, const Point& v) ;
+[[nodiscard]] const Point& operator- (const Point& u, const Point& v);
 Point& operator+=(Point&, const Point&);
 Point& operator-=(Point&, const Point&);
 bool operator==(const Point& u, const Point& v);
