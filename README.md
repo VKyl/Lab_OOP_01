@@ -1,4 +1,4 @@
-# Kyliukh_OOP_01
+# Lab_OOP_01
 
 <br/>
 
