@@ -1,9 +1,15 @@
 #include "Point.h"
+
 Point::Point(double x, double y): _x(x), _y(y) {}
 
-Point::Point(const Point& p): _x(p.x()), _y(p.y()) {}
+Point::Point(const Point& p): _x(p.x()), _y(p.y()) {
+#ifndef NDEBUG
+	std::cout << "copied!" << std::endl;
+#endif 
 
-Point::Point(Point&& p) : _x(p.x()), _y(p.y())
+}
+
+Point::Point(Point&& p) noexcept : _x(p.x()), _y(p.y())
 {
 	p.x() = 0;
 	p.y() = 0;
@@ -18,7 +24,7 @@ Point& Point::operator=(const Point& p)
 	return *this;
 }
 
-Point& Point::operator=(Point&& p)
+Point& Point::operator=(Point&& p) noexcept
 {
 	x() = p.x();
 	y() = p.y();
@@ -33,12 +39,12 @@ ostream& operator<< (ostream& out, const Point& p)
 	return out;
 }
 
-[[nodiscard]] const Point& operator+ (const Point& u, const Point& v)
+[[nodiscard]] const Point operator+ (const Point& u, const Point& v)
 {
 	return { u.x() + v.x(), u.y() + v.y()};
 }
 
-[[nodiscard]] const Point& operator- (const Point& u, const Point& v)
+[[nodiscard]] const Point operator- (const Point& u, const Point& v)
 {
 	return { u.x() - v.x(), u.y() - v.y() };
 }
