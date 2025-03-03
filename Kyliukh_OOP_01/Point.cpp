@@ -1,9 +1,7 @@
 #include "Point.h"
 Point::Point(double x, double y): _x(x), _y(y) {}
 
-Point::Point(const Point& p): _x(p.x()), _y(p.y()){
-	std::cout << p << "copied!";
-}
+Point::Point(const Point& p): _x(p.x()), _y(p.y()) {}
 
 Point::~Point(){}
 
