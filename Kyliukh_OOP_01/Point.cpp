@@ -1,7 +1,9 @@
 #include "Point.h"
 Point::Point(double x, double y): _x(x), _y(y) {}
 
-Point::Point(const Point& p): _x(p.x()), _y(p.y()){}
+Point::Point(const Point& p): _x(p.x()), _y(p.y()){
+	std::cout << p << "copied!";
+}
 
 Point::~Point(){}
 
@@ -30,13 +32,15 @@ const Point operator- (const Point& u, const Point& v)
 
 Point& operator+=(Point& u, const Point& v)
 {
-	u = u + v;
+	u.x() +=  v.x();
+	u.y() += v.y();
 	return u;
 }
 
 Point& operator-=(Point& u, const Point& v)
 {
-	u = u - v;
+	u.x() -= v.x();
+	u.y() -= v.y();
 	return u;
 }
 
