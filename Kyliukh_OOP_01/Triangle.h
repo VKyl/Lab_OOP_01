@@ -15,6 +15,8 @@ public:
 		Segment(const Point& a, const Point& b);
 	
 		const double length();
+		const Point& a() const;
+		const Point& b() const;
 		/*{
 			const double x = _a.x() - _b.x();
 			const double y = _a.y() - _b.y();
