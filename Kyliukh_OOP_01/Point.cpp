@@ -9,11 +9,11 @@ Point::Point(const Point& p): _x(p.x()), _y(p.y()) {
 
 }
 
-Point::Point(Point&& p) noexcept : _x(p.x()), _y(p.y())
-{
-	p.x() = 0;
-	p.y() = 0;
-}
+//Point::Point(Point&& p) noexcept : _x(p.x()), _y(p.y())
+//{
+//	p.x() = 0;
+//	p.y() = 0;
+//}
 
 Point::~Point(){}
 
@@ -38,14 +38,14 @@ Point& Point::operator=(const Point& p)
 	return *this;
 }
 
-Point& Point::operator=(Point&& p) noexcept
-{
-	x() = p.x();
-	y() = p.y();
-	p.x() = 0;
-	p.y() = 0;
-	return *this;
-}
+//Point& Point::operator=(Point&& p) noexcept
+//{
+//	x() = p.x();
+//	y() = p.y();
+//	p.x() = 0;
+//	p.y() = 0;
+//	return *this;
+//}
 
 ostream& operator<< (ostream& out, const Point& p)
 {

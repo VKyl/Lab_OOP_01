@@ -10,13 +10,15 @@ private:
 public:
 	Point(double x = 0, double y = 0);
 	Point(const Point&);
-	Point(Point&&) noexcept;
+	//Point(Point&&) noexcept;
+	Point(Point&&) = default;
 	~Point();
 
 	Point& operator+=(const Point&);
 	Point& operator-=(const Point&);
 	Point& operator=(const Point&);
-	Point& operator=(Point&&) noexcept;
+	//Point& operator=(Point&&) noexcept;
+	Point& operator=(Point&&) = default;
 
 	double& x(){ return _x; }
 	double& y() { return _y; }

@@ -69,6 +69,7 @@ public:
 	Triangle& operator=(Triangle&& t); 
 
 private:
+	bool isValidTriangle(const double& a, const double& b, const double& c);
 	void clearTriangle(Triangle& t);
 	// t.a({0, 0});
 	// t.b({1, 0});
