@@ -12,16 +12,16 @@ public:
 		const Point& _b;
 
 	public:
-		Segment(const Point& a, const Point& b);
-	
+		Segment(const Point& a, const Point& b) : _a(a), _b(b) {}
+
 		const double length();
-		const Point& a() const;
-		const Point& b() const;
 		/*{
 			const double x = _a.x() - _b.x();
 			const double y = _a.y() - _b.y();
 			return sqrt(pow(x, 2) + pow(y, 2));
 		}*/
+		const Point& a() const { return _a; }
+		const Point& b() const { return _b; }
 	};
 
 private:
@@ -33,11 +33,28 @@ private:
 public:
 	Triangle(const double x1=0, const double y1=0, 
 			 const double x2=1, const double y2=0, 
-			 const double x3=0, const double y3=1);
+			 const double x3=0, const double y3=1) :
+		_a(x1,y1),_b(x2,y2),_c(x3,y3),
+		_ab_ptr(nullptr), _ac_ptr(nullptr), _bc_ptr(nullptr),
+		_ab_mid_ptr(nullptr), _ac_mid_ptr(nullptr), _bc_mid_ptr(nullptr) { }
 
-	Triangle(const Point& a, const Point& b, const Point& c);
-	Triangle(const Triangle& t);
-	Triangle(Triangle&& t);
+	Triangle(const Point& a, const Point& b, const Point& c) :
+		_a(a), _b(b), _c(c),
+		_ab_ptr(nullptr), _ac_ptr(nullptr), _bc_ptr(nullptr),
+		_ab_mid_ptr(nullptr), _ac_mid_ptr(nullptr), _bc_mid_ptr(nullptr) { }
+
+	Triangle(const Triangle& t) :
+		_a(t.a()), _b(t.b()), _c(t.c()),
+		_ab_ptr(nullptr), _ac_ptr(nullptr), _bc_ptr(nullptr),
+		_ab_mid_ptr(nullptr), _ac_mid_ptr(nullptr), _bc_mid_ptr(nullptr) { }
+
+	Triangle(Triangle&& t) : 
+		_a(t.a()), _b(t.b()), _c(t.c()),
+		_ab_ptr(nullptr), _ac_ptr(nullptr), _bc_ptr(nullptr),
+		_ab_mid_ptr(nullptr), _ac_mid_ptr(nullptr), _bc_mid_ptr(nullptr)
+	{
+		clearTriangle(t);
+	}
 
 
 	~Triangle();
@@ -70,6 +87,7 @@ public:
 
 private:
 	bool isValidTriangle(const double& a, const double& b, const double& c);
+	// return fabs((y1-y2)(x1-x3) - (y1-y3)(x1-x2)) > 1e-14;
 	void clearTriangle(Triangle& t);
 	// t.a({0, 0});
 	// t.b({1, 0});
