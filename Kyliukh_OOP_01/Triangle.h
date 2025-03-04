@@ -12,7 +12,7 @@ public:
 		const Point& _b;
 
 	public:
-		Segment(const Point& a, const Point& b) : _a(a), _b(b) {}
+		Segment(const Point& a, const Point& b);
 
 		const double length();
 		/*{
@@ -20,56 +20,48 @@ public:
 			const double y = _a.y() - _b.y();
 			return sqrt(pow(x, 2) + pow(y, 2));
 		}*/
-		const Point& a() const { return _a; }
-		const Point& b() const { return _b; }
+		const Point& a() const;
+		const Point& b() const;
 	};
 
 private:
 	Point _a, _b, _c;
-	Segment *_ab_ptr, * _ac_ptr, * _bc_ptr;
+	Segment *_ab_ptr = nullptr, 
+		    * _ac_ptr = nullptr, 
+		    * _bc_ptr = nullptr;
 	
-	Point *_ab_mid_ptr, *_ac_mid_ptr, *_bc_mid_ptr;
+	Segment* _ab_m_ptr = nullptr,
+		* _ac_m_ptr = nullptr,
+		* _bc_m_ptr = nullptr;
+
+	Point *_ab_m_p_ptr = nullptr, 
+		  *_ac_m_p_ptr = nullptr, 
+		  *_bc_m_p_ptr = nullptr;
 
 public:
-	Triangle(const double x1=0, const double y1=0, 
-			 const double x2=1, const double y2=0, 
-			 const double x3=0, const double y3=1) :
-		_a(x1,y1),_b(x2,y2),_c(x3,y3),
-		_ab_ptr(nullptr), _ac_ptr(nullptr), _bc_ptr(nullptr),
-		_ab_mid_ptr(nullptr), _ac_mid_ptr(nullptr), _bc_mid_ptr(nullptr) { }
+	Triangle(const double x1 = 0, const double y1 = 0,
+		const double x2 = 1, const double y2 = 0,
+		const double x3 = 0, const double y3 = 1);
 
-	Triangle(const Point& a, const Point& b, const Point& c) :
-		_a(a), _b(b), _c(c),
-		_ab_ptr(nullptr), _ac_ptr(nullptr), _bc_ptr(nullptr),
-		_ab_mid_ptr(nullptr), _ac_mid_ptr(nullptr), _bc_mid_ptr(nullptr) { }
+	Triangle(const Point& a, const Point& b, const Point& c);
 
-	Triangle(const Triangle& t) :
-		_a(t.a()), _b(t.b()), _c(t.c()),
-		_ab_ptr(nullptr), _ac_ptr(nullptr), _bc_ptr(nullptr),
-		_ab_mid_ptr(nullptr), _ac_mid_ptr(nullptr), _bc_mid_ptr(nullptr) { }
+	Triangle(const Triangle& t);
 
-	Triangle(Triangle&& t) : 
-		_a(t.a()), _b(t.b()), _c(t.c()),
-		_ab_ptr(nullptr), _ac_ptr(nullptr), _bc_ptr(nullptr),
-		_ab_mid_ptr(nullptr), _ac_mid_ptr(nullptr), _bc_mid_ptr(nullptr)
-	{
-		clearTriangle(t);
-	}
-
+	Triangle(Triangle&& t);
 
 	~Triangle();
 
-	const Point& a() const { return _a; }
+	const Point& a() const;
 	void a(const double x, const double y);
 	void a(const Point& p);
 	//void a(Point&& p);
 
-	const Point& b() const { return _b; }
+	const Point& b() const;
 	void b(const double x, const double y);
 	void b(const Point& p);
 	//void b(Point&& p);
 
-	const Point& c() const { return _c; }
+	const Point& c() const;
 	void c(const double x, const double y);
 	void c(const Point& p);
 	//void c(Point&& p);
