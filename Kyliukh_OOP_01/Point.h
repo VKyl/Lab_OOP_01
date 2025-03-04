@@ -12,7 +12,7 @@ public:
 	Point(const Point&);
 	//Point(Point&&) noexcept;
 	Point(Point&&) = default;
-	~Point();
+	~Point() = default;
 
 	Point& operator+=(const Point&);
 	Point& operator-=(const Point&);

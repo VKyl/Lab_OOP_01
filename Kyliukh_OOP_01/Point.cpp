@@ -15,7 +15,7 @@ Point::Point(const Point& p): _x(p.x()), _y(p.y()) {
 //	p.y() = 0;
 //}
 
-Point::~Point(){}
+//Point::~Point(){}
 
 Point& Point::operator+=(const Point& v)
 {
