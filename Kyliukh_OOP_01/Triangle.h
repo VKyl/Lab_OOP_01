@@ -51,17 +51,14 @@ public:
 	const Point& a() const;
 	void a(const double x, const double y);
 	void a(const Point& p);
-	//void a(Point&& p);
 
 	const Point& b() const;
 	void b(const double x, const double y);
 	void b(const Point& p);
-	//void b(Point&& p);
 
 	const Point& c() const;
 	void c(const double x, const double y);
 	void c(const Point& p);
-	//void c(Point&& p);
 
 	const Segment& ab();
 	const Segment& ac();
@@ -79,26 +76,17 @@ public:
 	Triangle& operator=(Triangle&& t) noexcept; 
 
 private:
-	//bool isSharingLine(const Point& a, const Point& b, const Point& c);
-	// return fabs((y1-y2)(x1-x3) - (y1-y3)(x1-x2)) > 1e-14;
+	
 	void clearTriangle(Triangle& t);
-
 	void clearSideRelatedPtrs(Point* m_p_ptr, Segment* m_ptr);
+	
 	void reCalcMidPoint(Point* m_p_ptr, const Point& p1, const Point& p2);
-	// t.a({0, 0});
-	// t.b({1, 0});
-	// t.c({0, 1});
-	//void clearSegment(Segment* segment_ptr);
-	// if(segment == nullptr) return;
-	// delete segment_ptr;
-	// segment_ptr = nullptr;
-	//void clearPoint(Point* point_ptr);
-
 	const Point& getMidPointOrCalc(Point* m_p_ptr, const Point& p1, const Point& p2);
 	const Segment& getSegmentOrCalc(Segment* segment_ptr, const Point& p1, const Point& p2);
-	// if (segment_ptr == nullptr) segment_ptr = new Segment(p1, p2);
-	// return segment;
 };
+
+ostream& operator<<(ostream& out, const Triangle& t);
+ostream& operator<<(ostream& out, const Triangle::Segment& s);
 
 template <typename T>
 void clearPtr(T* segment_ptr)

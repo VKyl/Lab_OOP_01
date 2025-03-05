@@ -78,7 +78,7 @@ void Triangle::b(const double x, const double y)
 {
     if (_b.x() - x <= DBL_EPSILON && _b.y() - y <= DBL_EPSILON) return;
      _b = Point(x, y);
-     assert(isSharingLine(_a, _b, _c));
+     assert(!isSharingLine(_a, _b, _c));
      reCalcMidPoint(_ab_m_p_ptr, _a, _b);
      reCalcMidPoint(_bc_m_p_ptr, _b, _c);
      /*clearSideRelatedPtrs(_ab_m_p_ptr, _ab_m_ptr);
@@ -89,7 +89,7 @@ void Triangle::b(const Point& p)
 {
     if (_a == p) return;
      _b = p;
-     assert(isSharingLine(_a, _b, _c));
+     assert(!isSharingLine(_a, _b, _c));
      reCalcMidPoint(_ab_m_p_ptr, _a, _b);
      reCalcMidPoint(_bc_m_p_ptr, _b, _c);
      /*clearSideRelatedPtrs(_ab_m_p_ptr, _ab_m_ptr);
@@ -102,7 +102,7 @@ void Triangle::c(const double x, const double y)
 {
     if (_c.x() - x <= DBL_EPSILON && _c.y() - y <= DBL_EPSILON) return;
      _c = Point(x, y);
-     assert(isSharingLine(_a, _b, _c));
+     assert(!isSharingLine(_a, _b, _c));
      reCalcMidPoint(_ab_m_p_ptr, _a, _c);
      reCalcMidPoint(_bc_m_p_ptr, _b, _c);
      /*clearSideRelatedPtrs(_ab_m_p_ptr, _ab_m_ptr);
@@ -113,7 +113,7 @@ void Triangle::c(const Point& p)
 {
     if (_a == p) return;
      _c = p;
-     assert(isSharingLine(_a, _b, _c));
+     assert(!isSharingLine(_a, _b, _c));
      reCalcMidPoint(_ac_m_p_ptr, _a, _c);
      reCalcMidPoint(_bc_m_p_ptr, _b, _c);
      /*clearSideRelatedPtrs(_ac_m_p_ptr, _ac_m_ptr);
@@ -193,4 +193,15 @@ void Triangle::reCalcMidPoint(Point* m_p_ptr, const Point& p1, const Point& p2)
 {
      (*m_p_ptr).x() = (p1.x() + p2.x()) / 2;
      (*m_p_ptr).y() = (p1.y() + p2.y()) / 2;
+}
+
+ostream& operator<<(ostream& out, const Triangle& t)
+{
+    out << "Triangle has points: " << t.a() << ", " << t.b() << ", " << t.c();
+    return out;
+}
+ostream& operator<<(ostream& out, const Triangle::Segment& s)
+{
+    out << "Segment has points: " << s.a() << ", " << s.b();
+    return out;
 }
