@@ -84,6 +84,7 @@ private:
 	void clearTriangle(Triangle& t);
 
 	void clearSideRelatedPtrs(Point* m_p_ptr, Segment* m_ptr);
+	void reCalcMidPoint(Point* m_p_ptr, const Point& p1, const Point& p2);
 	// t.a({0, 0});
 	// t.b({1, 0});
 	// t.c({0, 1});
@@ -99,3 +100,9 @@ private:
 	// return segment;
 };
 
+template <typename T>
+void clearPtr(T* segment_ptr)
+{
+	delete segment_ptr;
+	segment_ptr = nullptr;
+}

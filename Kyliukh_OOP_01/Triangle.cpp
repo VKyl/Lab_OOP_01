@@ -52,54 +52,72 @@ const Point& Triangle::a() const { return _a; }
 
 void Triangle::a(const double x, const double y)
 {
+    if (_a.x() - x <= DBL_EPSILON && _a.y() - y <= DBL_EPSILON) return;
      _a = Point(x, y);
      assert(!isSharingLine(_a, _b, _c));
-     clearSideRelatedPtrs(_ab_m_p_ptr, _ab_m_ptr);
-     clearSideRelatedPtrs(_ac_m_p_ptr, _ac_m_ptr);
+     reCalcMidPoint(_ab_m_p_ptr, _a, _b);
+     reCalcMidPoint(_ac_m_p_ptr, _a, _c);
+     /*clearSideRelatedPtrs(_ab_m_p_ptr, _ab_m_ptr);
+     clearSideRelatedPtrs(_ac_m_p_ptr, _ac_m_ptr);*/
 }
 
 void Triangle::a(const Point& p)
 {
+    if (_a == p) return;
      _a = p;
-     assert(isSharingLine(_a, _b, _c));
-     clearSideRelatedPtrs(_ab_m_p_ptr, _ab_m_ptr);
-     clearSideRelatedPtrs(_ac_m_p_ptr, _ac_m_ptr);
+     assert(!isSharingLine(_a, _b, _c));
+     reCalcMidPoint(_ab_m_p_ptr, _a, _b);
+     reCalcMidPoint(_ac_m_p_ptr, _a, _c);
+     /*clearSideRelatedPtrs(_ab_m_p_ptr, _ab_m_ptr);
+     clearSideRelatedPtrs(_ac_m_p_ptr, _ac_m_ptr);*/
 }
 
 const Point& Triangle::b() const { return _b; }
 
 void Triangle::b(const double x, const double y)
 {
+    if (_b.x() - x <= DBL_EPSILON && _b.y() - y <= DBL_EPSILON) return;
      _b = Point(x, y);
      assert(isSharingLine(_a, _b, _c));
-     clearSideRelatedPtrs(_ab_m_p_ptr, _ab_m_ptr);
-     clearSideRelatedPtrs(_bc_m_p_ptr, _bc_m_ptr);
+     reCalcMidPoint(_ab_m_p_ptr, _a, _b);
+     reCalcMidPoint(_bc_m_p_ptr, _b, _c);
+     /*clearSideRelatedPtrs(_ab_m_p_ptr, _ab_m_ptr);
+     clearSideRelatedPtrs(_bc_m_p_ptr, _bc_m_ptr);*/
 }
 
 void Triangle::b(const Point& p)
 {
+    if (_a == p) return;
      _b = p;
      assert(isSharingLine(_a, _b, _c));
-     clearSideRelatedPtrs(_ab_m_p_ptr, _ab_m_ptr);
-     clearSideRelatedPtrs(_bc_m_p_ptr, _bc_m_ptr);
+     reCalcMidPoint(_ab_m_p_ptr, _a, _b);
+     reCalcMidPoint(_bc_m_p_ptr, _b, _c);
+     /*clearSideRelatedPtrs(_ab_m_p_ptr, _ab_m_ptr);
+     clearSideRelatedPtrs(_bc_m_p_ptr, _bc_m_ptr);*/
 }
 
 const Point& Triangle::c() const { return _c; }
 
 void Triangle::c(const double x, const double y)
 {
+    if (_c.x() - x <= DBL_EPSILON && _c.y() - y <= DBL_EPSILON) return;
      _c = Point(x, y);
      assert(isSharingLine(_a, _b, _c));
-     clearSideRelatedPtrs(_ab_m_p_ptr, _ab_m_ptr);
-     clearSideRelatedPtrs(_bc_m_p_ptr, _bc_m_ptr);
+     reCalcMidPoint(_ab_m_p_ptr, _a, _c);
+     reCalcMidPoint(_bc_m_p_ptr, _b, _c);
+     /*clearSideRelatedPtrs(_ab_m_p_ptr, _ab_m_ptr);
+     clearSideRelatedPtrs(_bc_m_p_ptr, _bc_m_ptr);*/
 }
 
 void Triangle::c(const Point& p)
 {
+    if (_a == p) return;
      _c = p;
      assert(isSharingLine(_a, _b, _c));
-     clearSideRelatedPtrs(_ac_m_p_ptr, _ac_m_ptr);
-     clearSideRelatedPtrs(_bc_m_p_ptr, _bc_m_ptr);
+     reCalcMidPoint(_ac_m_p_ptr, _a, _c);
+     reCalcMidPoint(_bc_m_p_ptr, _b, _c);
+     /*clearSideRelatedPtrs(_ac_m_p_ptr, _ac_m_ptr);
+     clearSideRelatedPtrs(_bc_m_p_ptr, _bc_m_ptr);*/
 }
 
 const Triangle::Segment& Triangle::ab()
@@ -129,13 +147,20 @@ const Triangle::Segment& Triangle::medianBC() { return getSegmentOrCalc(_bc_m_pt
 
 Triangle& Triangle::operator=(const Triangle& t)
 {
-    // Add assignment logic here
+    if (this == &t) return *this;
+    a(t.a());
+    b(t.b());
+    c(t.c());
     return *this;
 }
 
 Triangle& Triangle::operator=(Triangle&& t) noexcept
 {
-    // Add move assignment logic here
+    if (this == &t) return *this;
+    a(t.a());
+    b(t.b());
+    c(t.c());
+    clearTriangle(t);
     return *this;
 }
 
@@ -164,10 +189,8 @@ const Triangle::Segment& Triangle::getSegmentOrCalc(Segment* segment_ptr, const 
      return *segment_ptr;
 }
 
-template <typename T>
-void clearPtr(T* segment_ptr)
+void Triangle::reCalcMidPoint(Point* m_p_ptr, const Point& p1, const Point& p2)
 {
-     if(segment_ptr == nullptr) return;
-     delete segment_ptr;
-     segment_ptr = nullptr;
+     (*m_p_ptr).x() = (p1.x() + p2.x()) / 2;
+     (*m_p_ptr).y() = (p1.y() + p2.y()) / 2;
 }

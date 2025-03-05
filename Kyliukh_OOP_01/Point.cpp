@@ -48,7 +48,7 @@ _NODISCARD const Point operator- (const Point& u, const Point& v)
 
 bool operator==(const Point& u, const Point& v)
 {
-	return u.x() == v.x() && u.y() == v.y();
+	return u.x() - v.x() <= DBL_EPSILON && u.y() - v.y() <= DBL_EPSILON;
 }
 
 bool operator!=(const Point& u, const Point& v)
@@ -58,5 +58,5 @@ bool operator!=(const Point& u, const Point& v)
 
 bool isSharingLine(const Point& a, const Point& b, const Point& c)
 {
-	return fabs((a.y() - b.y()) * (a.x() - c.x()) - (a.y() - c.y()) * (a.x() - b.x())) <= 1e-14;
+	return fabs((a.y() - b.y()) * (a.x() - c.x()) - (a.y() - c.y()) * (a.x() - b.x())) <= DBL_EPSILON;
 }
