@@ -9,14 +9,6 @@ Point::Point(const Point& p): _x(p.x()), _y(p.y()) {
 
 }
 
-//Point::Point(Point&& p) noexcept : _x(p.x()), _y(p.y())
-//{
-//	p.x() = 0;
-//	p.y() = 0;
-//}
-
-//Point::~Point(){}
-
 Point& Point::operator+=(const Point& v)
 {
 	x() += v.x();
@@ -37,15 +29,6 @@ Point& Point::operator=(const Point& p)
 	y() = p.y();
 	return *this;
 }
-
-//Point& Point::operator=(Point&& p) noexcept
-//{
-//	x() = p.x();
-//	y() = p.y();
-//	p.x() = 0;
-//	p.y() = 0;
-//	return *this;
-//}
 
 ostream& operator<< (ostream& out, const Point& p)
 {
@@ -71,4 +54,9 @@ bool operator==(const Point& u, const Point& v)
 bool operator!=(const Point& u, const Point& v)
 {
 	return !(u == v);
+}
+
+bool isSharingLine(const Point& a, const Point& b, const Point& c)
+{
+	return fabs((a.y() - b.y()) * (a.x() - c.x()) - (a.y() - c.y()) * (a.x() - b.x())) <= 1e-14;
 }

@@ -1,5 +1,6 @@
 #pragma once
 #include "Point.h"
+#include <cassert>
 #include <cmath>
 
 class Triangle
@@ -15,11 +16,7 @@ public:
 		Segment(const Point& a, const Point& b);
 
 		const double length();
-		/*{
-			const double x = _a.x() - _b.x();
-			const double y = _a.y() - _b.y();
-			return sqrt(pow(x, 2) + pow(y, 2));
-		}*/
+
 		const Point& a() const;
 		const Point& b() const;
 	};
@@ -47,7 +44,7 @@ public:
 
 	Triangle(const Triangle& t);
 
-	Triangle(Triangle&& t);
+	Triangle(Triangle&& t) noexcept;
 
 	~Triangle();
 
@@ -70,24 +67,33 @@ public:
 	const Segment& ac();
 	const Segment& bc();
 
+	const Point& mPointAB();
+	const Point& mPointAC();
+	const Point& mPointBC();
+
 	const Segment& medianAB();
 	const Segment& medianAC();
 	const Segment& medianBC();
 
 	Triangle& operator=(const Triangle& t);
-	Triangle& operator=(Triangle&& t); 
+	Triangle& operator=(Triangle&& t) noexcept; 
 
 private:
-	bool isValidTriangle(const double& a, const double& b, const double& c);
+	//bool isSharingLine(const Point& a, const Point& b, const Point& c);
 	// return fabs((y1-y2)(x1-x3) - (y1-y3)(x1-x2)) > 1e-14;
 	void clearTriangle(Triangle& t);
+
+	void clearSideRelatedPtrs(Point* m_p_ptr, Segment* m_ptr);
 	// t.a({0, 0});
 	// t.b({1, 0});
 	// t.c({0, 1});
-	void clearSegment(Segment* segment_ptr);
+	//void clearSegment(Segment* segment_ptr);
 	// if(segment == nullptr) return;
 	// delete segment_ptr;
 	// segment_ptr = nullptr;
+	//void clearPoint(Point* point_ptr);
+
+	const Point& getMidPointOrCalc(Point* m_p_ptr, const Point& p1, const Point& p2);
 	const Segment& getSegmentOrCalc(Segment* segment_ptr, const Point& p1, const Point& p2);
 	// if (segment_ptr == nullptr) segment_ptr = new Segment(p1, p2);
 	// return segment;

@@ -10,14 +10,12 @@ private:
 public:
 	Point(double x = 0, double y = 0);
 	Point(const Point&);
-	//Point(Point&&) noexcept;
 	Point(Point&&) = default;
 	~Point() = default;
 
 	Point& operator+=(const Point&);
 	Point& operator-=(const Point&);
 	Point& operator=(const Point&);
-	//Point& operator=(Point&&) noexcept;
 	Point& operator=(Point&&) = default;
 
 	double& x(){ return _x; }
@@ -33,4 +31,4 @@ _NODISCARD const Point operator- (const Point& u, const Point& v);
 bool operator==(const Point& u, const Point& v);
 bool operator!=(const Point& u, const Point& v);
 
-
+bool isSharingLine(const Point& a, const Point& b, const Point& c);
